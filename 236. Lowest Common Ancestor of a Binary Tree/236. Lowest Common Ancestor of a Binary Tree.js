@@ -1,0 +1,37 @@
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+class Treenode {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+var lowestCommonAncestor = function(root, p, q) {
+    // lowest common ancestor is the node which has both p and q as decendants
+    if (root === null) return null;
+
+    // if any of the nodes is a parent to the other node, return that node
+    if (root === p || root == q) return root;
+
+    const left = lowestCommonAncestor(root.left, p, q);
+    const right = lowestCommonAncestor(root.right, p, q);
+
+    if (left !== null && right !== null) {
+        return root;
+    }
+
+    return left !== null ? left : right;
+};
